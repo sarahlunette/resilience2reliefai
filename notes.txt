@@ -1,0 +1,21 @@
+# Sample RAG Document Sources
+# -------------------------------
+# Put into /data/documents/
+# - Post-Cyclone Needs Assessment (Vanuatu, 2023).pdf
+# - UNDP Resilient Schools Rebuild Guide.docx
+# - Samoa Recovery Plan Summary.pdf
+# - Green Climate Fund - Approved Projects Summary 2023.pdf
+# - Infrastructure Resilience in Small Islands (World Bank).pdf
+
+# 7. Output Template (templates/project_template.md)
+# ---------------------------------------------------
+# Project: {{ title }}
+# Sector: {{ sector }}
+# Based on: {{ source_doc }}
+# Description: {{ summary }}
+# SDGs: {{ sdg_list }}
+# Suggested Donors: {{ donors }}
+# Next Steps: {{ actions }}
+
+# This MVP is modular: you can plug in better LLMs, additional filters, or geospatial data.
+# Would you like a Streamlit version or multi-language export added next?

@@ -1,0 +1,10 @@
+langchain
+llama-index
+chromadb
+openai
+unstructured
+fastapi
+uvicorn
+python-docx
+PyMuPDF (fitz)
+pandas

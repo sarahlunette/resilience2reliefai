@@ -1,0 +1,13 @@
+# relief2resilience/
+# ├── app/
+# │   ├── main.py            # FastAPI app
+# │   ├── rag_chain.py        # RAG pipeline
+# │   ├── document_loader.py # Load and clean PDFs, DOCX, etc.
+# │   └── utils.py           # Helper functions
+# ├── data/
+# │   └── documents/         # Input docs (impact assessments, recovery plans)
+# ├── vectorstore/
+# │   └── chroma/            # Persisted vector DB
+# ├── templates/
+# │   └── project_template.md  # Output blueprint format
+# └── requirements.txt
