@@ -1,0 +1,1 @@
+The project is aimed at presenting a solution for relief to resilience, where the chatbot would propose a certain number of projects for resilience after a natural catastrophee. With means and resources computed.
