@@ -1,7 +1,7 @@
-from llama_index import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from langchain.chat_models import ChatOpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.vector_stores import ChromaVectorStore
+from llama_index.storage.vector_stores.chroma import ChromaVectorStore
 from llama_index.storage.storage_context import StorageContext
 
 llm = ChatOpenAI(temperature=0.3)

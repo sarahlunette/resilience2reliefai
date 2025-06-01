@@ -6,5 +6,10 @@ unstructured
 fastapi
 uvicorn
 python-docx
-PyMuPDF (fitz)
+PyMuPDF
 pandas
+langchain
+geopandas
+shapely
+folium
+tqdm
