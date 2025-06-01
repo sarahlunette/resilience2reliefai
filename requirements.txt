@@ -17,3 +17,13 @@ llama-index-vector-stores-chroma==0.10.30
 python-dotenv
 python-multipart
 numpy==1.26.4
+transformers
+sentence-transformers
+accelerate
+llama-index-embeddings-huggingface
+sentencepiece
+huggingface_hub
+auto-gptq
+torch
+llama-index-llms-huggingface
+llama-index-llms-huggingface-api
