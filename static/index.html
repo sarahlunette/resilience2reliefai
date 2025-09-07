@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resilience2Relief AI - Disaster Recovery Project Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2">Resilience2Relief AI</h1>
+                    <p class="text-xl text-blue-100">AI-powered disaster recovery project generation for Pacific Islands</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <div class="text-sm text-blue-100 mb-1">System Status</div>
+                        <div id="status" class="text-lg font-semibold">🟢 Online</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Project Generator Section -->
+        <section class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">🚀 Generate Recovery Projects</h2>
+            
+            <form id="projectForm" class="space-y-6">
+                <!-- Query Input -->
+                <div>
+                    <label for="query" class="block text-sm font-medium text-gray-700 mb-2">
+                        Project Description *
+                    </label>
+                    <textarea 
+                        id="query" 
+                        name="query" 
+                        rows="3" 
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Describe the disaster recovery projects you need (e.g., 'Generate housing reconstruction projects for cyclone recovery in Vanuatu')"
+                    ></textarea>
+                </div>
+
+                <!-- Form Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Disaster Type -->
+                    <div>
+                        <label for="disaster_type" class="block text-sm font-medium text-gray-700 mb-2">
+                            Disaster Type
+                        </label>
+                        <select id="disaster_type" name="disaster_type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select disaster type...</option>
+                            <option value="cyclone">Cyclone/Hurricane</option>
+                            <option value="earthquake">Earthquake</option>
+                            <option value="tsunami">Tsunami</option>
+                            <option value="flood">Flood</option>
+                            <option value="drought">Drought</option>
+                            <option value="volcanic">Volcanic Eruption</option>
+                        </select>
+                    </div>
+
+                    <!-- Region -->
+                    <div>
+                        <label for="region" class="block text-sm font-medium text-gray-700 mb-2">
+                            Region
+                        </label>
+                        <select id="region" name="region" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select region...</option>
+                            <option value="vanuatu">Vanuatu</option>
+                            <option value="samoa">Samoa</option>
+                            <option value="fiji">Fiji</option>
+                            <option value="tonga">Tonga</option>
+                            <option value="solomon_islands">Solomon Islands</option>
+                            <option value="papua_new_guinea">Papua New Guinea</option>
+                            <option value="marshall_islands">Marshall Islands</option>
+                            <option value="palau">Palau</option>
+                        </select>
+                    </div>
+
+                    <!-- Sectors -->
+                    <div>
+                        <label for="sectors" class="block text-sm font-medium text-gray-700 mb-2">
+                            Priority Sectors
+                        </label>
+                        <select id="sectors" name="sectors" multiple class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="housing">Housing</option>
+                            <option value="infrastructure">Infrastructure</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="health">Health</option>
+                            <option value="education">Education</option>
+                            <option value="environment">Environment</option>
+                            <option value="economic">Economic</option>
+                            <option value="governance">Governance</option>
+                        </select>
+                        <p class="text-sm text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple sectors</p>
+                    </div>
+
+                    <!-- Max Projects -->
+                    <div>
+                        <label for="max_projects" class="block text-sm font-medium text-gray-700 mb-2">
+                            Number of Projects
+                        </label>
+                        <input 
+                            type="number" 
+                            id="max_projects" 
+                            name="max_projects" 
+                            min="1" 
+                            max="10" 
+                            value="3"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button 
+                        type="submit" 
+                        class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+                    >
+                        <span id="generateText">Generate Projects</span>
+                        <div id="loadingSpinner" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">📋 Generated Projects</h2>
+                <button 
+                    id="exportBtn" 
+                    class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                    Export Results
+                </button>
+            </div>
+            <div id="projectResults" class="space-y-6"></div>
+        </section>
+
+        <!-- System Stats Section -->
+        <section class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 System Statistics</h2>
+            <div id="statsGrid" class="grid md:grid-cols-4 gap-6">
+                <!-- Stats will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Document Upload Section -->
+        <section class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📄 Document Library</h2>
+            
+            <!-- Upload Area -->
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 mb-6 text-center">
+                <input type="file" id="documentUpload" accept=".pdf,.docx,.txt,.csv,.md" class="hidden" />
+                <label for="documentUpload" class="cursor-pointer">
+                    <div class="text-gray-400 text-4xl mb-4">📁</div>
+                    <p class="text-lg font-medium text-gray-700">Click to upload disaster recovery documents</p>
+                    <p class="text-sm text-gray-500">Supports PDF, DOCX, TXT, CSV, MD files</p>
+                </label>
+            </div>
+
+            <!-- Documents List -->
+            <div id="documentsList" class="space-y-4">
+                <!-- Documents will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-4">Resilience2Relief AI - Empowering Pacific Islands Recovery</p>
+            <p class="text-gray-400">
+                Built with ❤️ for disaster resilience • 
+                <a href="/docs" class="text-blue-400 hover:underline">API Documentation</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = window.location.origin;
+
+        // Load system stats on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSystemStats();
+            loadDocuments();
+        });
+
+        // Project generation form handler
+        document.getElementById('projectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const generateText = document.getElementById('generateText');
+            const spinner = document.getElementById('loadingSpinner');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            generateText.textContent = 'Generating...';
+            spinner.classList.remove('hidden');
+            
+            try {
+                const formData = new FormData(e.target);
+                const sectors = Array.from(document.getElementById('sectors').selectedOptions).map(option => option.value);
+                
+                const requestData = {
+                    query: formData.get('query'),
+                    disaster_type: formData.get('disaster_type') || null,
+                    region: formData.get('region') || null,
+                    sectors: sectors.length > 0 ? sectors : null,
+                    max_projects: parseInt(formData.get('max_projects'))
+                };
+                
+                const response = await fetch(`${API_BASE}/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayProjects(result.data.projects);
+                    document.getElementById('resultsSection').classList.remove('hidden');
+                    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert('Error generating projects: ' + (result.message || 'Unknown error'));
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error generating projects. Please try again.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                generateText.textContent = 'Generate Projects';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // Display generated projects
+        function displayProjects(projects) {
+            const container = document.getElementById('projectResults');
+            container.innerHTML = projects.map(project => `
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">${project.title}</h3>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(project.priority)}">
+                            ${(project.priority || 'Medium').toUpperCase()}
+                        </span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">${project.description}</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <strong class="text-gray-700">Sectors:</strong>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                ${project.sector.map(s => `<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">${s}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <strong class="text-gray-700">Budget:</strong>
+                            <span class="text-green-600 font-semibold">${project.budget || 'TBD'}</span>
+                        </div>
+                        <div>
+                            <strong class="text-gray-700">Timeline:</strong>
+                            <span class="text-orange-600">${project.timeline || 'TBD'}</span>
+                        </div>
+                        <div>
+                            <strong class="text-gray-700">Beneficiaries:</strong>
+                            <span class="text-purple-600">${project.beneficiaries || 'TBD'}</span>
+                        </div>
+                    </div>
+                    
+                    ${project.sdgs ? `
+                    <div class="mb-4">
+                        <strong class="text-gray-700">SDGs:</strong>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            ${project.sdgs.map(sdg => `<span class="px-2 py-1 bg-green-100 text-green-800 rounded text-sm">${sdg}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${project.funding_sources ? `
+                    <div>
+                        <strong class="text-gray-700">Potential Funders:</strong>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            ${project.funding_sources.map(funder => `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-sm">${funder}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function getPriorityColor(priority) {
+            switch((priority || '').toLowerCase()) {
+                case 'high': return 'bg-red-100 text-red-800';
+                case 'medium': return 'bg-yellow-100 text-yellow-800';
+                case 'low': return 'bg-green-100 text-green-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        // Load system statistics
+        async function loadSystemStats() {
+            try {
+                const response = await fetch(`${API_BASE}/stats`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const stats = result.data;
+                    document.getElementById('statsGrid').innerHTML = `
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">${stats.total_documents}</div>
+                            <div class="text-gray-600">Documents</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600">${stats.total_projects_generated}</div>
+                            <div class="text-gray-600">Projects Generated</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-purple-600">${stats.available_sectors.length}</div>
+                            <div class="text-gray-600">Sectors</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-orange-600">${stats.supported_regions.length}</div>
+                            <div class="text-gray-600">Regions</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Load documents
+        async function loadDocuments() {
+            try {
+                const response = await fetch(`${API_BASE}/documents`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const documents = result.data.documents;
+                    document.getElementById('documentsList').innerHTML = documents.map(doc => `
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-4">📄</div>
+                                <div>
+                                    <div class="font-medium text-gray-800">${doc.filename}</div>
+                                    <div class="text-sm text-gray-500">
+                                        ${formatFileSize(doc.file_size)} • Uploaded ${new Date(doc.upload_date).toLocaleDateString()}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                ✓ Processed
+                            </span>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading documents:', error);
+            }
+        }
+
+        // Document upload handler
+        document.getElementById('documentUpload').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch(`${API_BASE}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Document uploaded successfully!');
+                    loadDocuments(); // Refresh document list
+                    loadSystemStats(); // Refresh stats
+                } else {
+                    alert('Error uploading document: ' + result.message);
+                }
+                
+            } catch (error) {
+                console.error('Error uploading:', error);
+                alert('Error uploading document. Please try again.');
+            }
+            
+            // Reset file input
+            e.target.value = '';
+        });
+
+        // Export results
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            const results = Array.from(document.getElementById('projectResults').children).map(card => {
+                return {
+                    title: card.querySelector('h3').textContent,
+                    description: card.querySelector('p').textContent,
+                    // Add more fields as needed
+                };
+            });
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `resilience_projects_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        });
+
+        // Utility functions
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    </script>
+</body>
+</html>
